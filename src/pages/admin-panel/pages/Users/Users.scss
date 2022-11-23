@@ -1,0 +1,10 @@
+/** @format */
+
+@import "../../../../styles/variables";
+.ap__users_to-dialog {
+	transition: ease all 0.3s;
+	&:hover {
+		background-color: $secondary;
+		cursor: pointer;
+	}
+}

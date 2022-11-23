@@ -1,0 +1,47 @@
+/** @format */
+@import "../../../../styles/_variables.scss";
+.ap__auth {
+	position: relative;
+	min-height: 100vh;
+	min-width: 100vw;
+	background: url("../../assets/bg-auth.png");
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.5);
+		z-index: 2;
+	}
+}
+.ap__auth_block {
+	position: relative;
+	z-index: 3;
+	width: 400px;
+	padding: 50px;
+	border-radius: 20px;
+	background-color: #fff;
+	form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 10px;
+		label {
+			font-size: 2rem;
+			margin-bottom: 5px;
+		}
+		button {
+			width: 100%;
+		}
+		input {
+			width: 100%;
+			text-align: center;
+		}
+	}
+}

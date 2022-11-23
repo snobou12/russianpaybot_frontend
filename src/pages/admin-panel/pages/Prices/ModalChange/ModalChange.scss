@@ -1,0 +1,77 @@
+@import "../../../../../styles/variables";
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+
+.modal__change_prices{
+    display: none;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	z-index: 4;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.8);
+	&--show {
+		display: flex;
+	}
+}
+
+.modal__change_prices-block{
+	position: relative;
+    min-width: 800px;
+	max-width: 800px;
+	min-height: 600px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	-webkit-animation-duration: 0.7s;
+	animation-name: animatetop;
+	animation-duration: 0.7s;
+    border-radius: 3px;
+	background-color: $primary;
+	color:$secondary;
+	padding: 20px;
+	h1{
+		margin-bottom: 50px;
+	}
+	input{
+			width: 100%;
+			margin-bottom: 30px;
+	}
+	h2{
+		margin-bottom: 10px;
+	}
+	button{
+		align-self: center;
+		width: 80%;
+	}
+}
+
+
+.modal__change_prices-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 101;
+	width: 30px;
+	height: auto;
+	color: #808383;
+	transition: ease color 0.3s;
+	&:hover {
+		cursor: pointer;
+		color: #a0a0a0;
+	}
+}

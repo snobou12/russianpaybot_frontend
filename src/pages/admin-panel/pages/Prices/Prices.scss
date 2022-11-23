@@ -1,0 +1,25 @@
+
+@import "../../../../styles/variables";
+.ap__prices_block {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 20px;
+}
+
+.ap__prices_content {
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: flex-start;
+	gap: 40px;
+}
+
+.ap__prices_change-td {
+	transition: ease all 0.3s;
+	&:hover {
+		background-color: $secondary;
+		cursor: pointer;
+	}
+}

@@ -1,0 +1,36 @@
+/** @format */
+
+@import "../../../../styles/variables";
+
+.ap__page_header {
+	height: 50px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+	div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 20px;
+	}
+	svg {
+		color: $secondary;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+		transition: ease 0.5s all;
+		&:first-child {
+			&:hover {
+				opacity: 0.7;
+			}
+		}
+		&:last-child {
+			stroke-width: 0.08rem;
+			&:hover {
+				transform: rotate(180deg);
+				opacity: 0.7;
+			}
+		}
+	}
+}

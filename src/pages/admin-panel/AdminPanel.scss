@@ -1,0 +1,32 @@
+/** @format */
+
+@import "../../styles/variables";
+
+.ap__page {
+	padding-left: 200px;
+	height: 100vh;
+	overflow-y: auto;
+}
+
+.ap__page_content {
+	min-height: calc(100vh - 70px);
+	position: relative;
+	background: url("./assets/bg-auth.png");
+	color: $secondary;
+	&::after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0, 0, 0, 0.8);
+		z-index: 2;
+	}
+	padding: 50px;
+	.ap__page_inner {
+		width: 100%;
+		position: relative;
+		z-index: 3;
+	}
+}

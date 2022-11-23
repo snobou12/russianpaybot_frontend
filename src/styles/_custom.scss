@@ -1,0 +1,46 @@
+/** @format */
+
+@import "./variables.scss";
+
+.btn {
+	color: #fff;
+	font-size: 1.8rem;
+	font-weight: 400;
+	line-height: 1.8rem;
+	background: $primary;
+	border: none;
+	border-bottom: 4px solid #79645f;
+	padding: 6px 32px 6px;
+	text-align: center;
+	transition: all ease 0.5s;
+	&:hover {
+		box-shadow: 0px 0px #79645f, 3px 2px #79645f;
+		background: $secondary;
+		color: $primary;
+		cursor: pointer;
+	}
+	&--inverted {
+		color: $primary;
+		background: $secondary;
+		&:hover {
+			box-shadow: 0px 0px #79645f, 3px 2px #79645f;
+			color: #fff;
+			background: $primary;
+		}
+	}
+}
+
+.inpt {
+	font-size: 1.8rem;
+	font-weight: 500;
+	padding: 7px 12px;
+	background-color: #ffffff;
+	background-image: none;
+	border: 1px solid #c7c6c2;
+	outline: none;
+	border-radius: 4px;
+	&:focus {
+		border: 1px solid #c7c6c2;
+		box-shadow: 0 1px 7px rgb(4 38 51 / 30%);
+	}
+}

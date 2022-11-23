@@ -1,0 +1,31 @@
+@import "../../../../styles/variables";
+.ap__header{
+    position: sticky;
+    top:0;
+    left:0;
+    z-index: 4;
+    height: 70px;
+    background-color: $primary;
+    color:$secondary;
+}
+
+.ap__header_admin{
+    position: absolute;
+    z-index: 1;
+    right: 0;
+    top:50%;
+    transform: translate(0,-50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    img{
+        height: 60px;
+    }
+    div{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}

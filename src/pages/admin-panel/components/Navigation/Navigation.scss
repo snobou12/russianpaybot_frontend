@@ -1,0 +1,98 @@
+/** @format */
+
+@import "../../../../styles/variables";
+.ap__navigation {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 4;
+	height: 100vh;
+	width: 200px;
+	background-color: $primary;
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-start;
+	align-items: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-right: 4px solid #3e4049;
+}
+
+.ap__navigation_logo {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	gap: 10px;
+	text-decoration: none;
+	color: #a4a6b3;
+	img {
+		width: 100px;
+	}
+	span {
+		font-size: 2rem;
+		line-height: 2rem;
+		text-align: center;
+	}
+	margin-bottom: 40px;
+	transition: ease all 0.3s;
+	&:hover {
+		cursor: pointer;
+		color: $secondary;
+	}
+}
+.ap__navigation_nav {
+	width: 100%;
+	padding-bottom: 5px;
+	border-bottom: 4px solid #3e4049;
+}
+.ap__navigation_navigation {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.ap__navigation_item {
+	width: 100%;
+}
+
+.ap__navigation_link {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+	text-decoration: none;
+	color: #a4a6b3;
+	border-left: 3px solid transparent;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	padding-left: 8px;
+	transition: ease all 0.3s;
+	svg {
+		width: 30px;
+		height: 30px;
+	}
+	span {
+		font-size: 1.6rem;
+	}
+
+	&:hover {
+		color: $secondary;
+		background-color: #3e4049;
+	}
+	&--active {
+		color: $secondary;
+		background-color: #3e4049;
+		border-left: 3px solid $secondary;
+	}
+}
+
+.ap__logout {
+	position: absolute;
+	bottom: 10px;
+	left: 50%;
+	transform: translate(-50%);
+}
