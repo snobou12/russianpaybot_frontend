@@ -18,7 +18,7 @@ const APHeader: FC<Props> = ({ title, handleClickReload }) => {
 		<div className="ap__page_header">
 			<div>
 				<IoArrowBackCircleSharp onClick={handleClickBack} />
-				<h2 className="ap__title">{title}</h2>
+				<h2 className="ap__title">{title} 1</h2>
 			</div>
 
 			<TfiReload onClick={handleClickReload} />
