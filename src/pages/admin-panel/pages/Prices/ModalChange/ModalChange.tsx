@@ -108,7 +108,6 @@ const ModalChange: FC<Props> = ({
 						<h2>Цена в месяц</h2>
 
 						<input
-							disabled={modalInfo?.plan.pricePerMonth === null}
 							onChange={e => handleChangeModalInfo(e, "pricePerMonth")}
 							className="inpt"
 							value={String(modalInfo?.plan.pricePerMonth)}

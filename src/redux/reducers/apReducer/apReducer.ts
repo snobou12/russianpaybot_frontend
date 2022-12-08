@@ -6,13 +6,17 @@ import { IAdmin } from "../../../models/IAdmin";
 import { IAllConversation } from "../../../models/IAllConversation";
 import { IConversation, messageType } from "../../../models/IConversation";
 import { IPrice, PricePlanType } from "../../../models/IPrice";
+import { IPromo } from "../../../models/IPromo";
 import { IUser } from "../../../models/IUser";
 import {
 	changePrice,
 	checkAuth,
+	createPromo,
+	deletePromo,
 	getConversation,
 	getConversations,
 	getPrices,
+	getPromos,
 	getUsers,
 	login,
 	logout,
@@ -62,6 +66,15 @@ interface AuthState {
 	isLoadingChangingPrice: boolean;
 	changingPriceSuccessMessage: string;
 	changingPriceErrorMessage: string;
+	//promocodes
+	promocodes: IPromo[];
+	isLoadingPromocodes: boolean;
+	isLoadingCreatePromo: boolean;
+	createPromoSuccessMessage: string;
+	createPromoErrorMessage: string;
+	isLoadingDeletePromo: boolean;
+	deletePromoSuccessMessage: string;
+	deletePromoErrorMessage: string;
 }
 
 const initialState: AuthState = {
@@ -95,6 +108,16 @@ const initialState: AuthState = {
 	isLoadingChangingPrice: false,
 	changingPriceSuccessMessage: "",
 	changingPriceErrorMessage: "",
+	//promocodes
+	//createPromo
+	promocodes: [],
+	isLoadingPromocodes: false,
+	isLoadingCreatePromo: false,
+	createPromoSuccessMessage: "",
+	createPromoErrorMessage: "",
+	isLoadingDeletePromo: false,
+	deletePromoSuccessMessage: "",
+	deletePromoErrorMessage: "",
 };
 
 export const apSlice = createSlice({
@@ -303,6 +326,54 @@ export const apSlice = createSlice({
 			state.isLoadingChangingPrice = false;
 			state.changingPriceErrorMessage = action.payload;
 			state.changingPriceSuccessMessage = "";
+		},
+		//Промокоды
+		//Получить все промокоды
+
+		[getPromos.fulfilled.type]: (state, action: PayloadAction<IPromo[]>) => {
+			state.isLoadingPromocodes = false;
+			state.promocodes = action.payload;
+		},
+		[getPromos.pending.type]: state => {
+			state.isLoadingPromocodes = true;
+		},
+		[getPromos.rejected.type]: state => {
+			state.isLoadingPromocodes = false;
+			state.promocodes = [];
+		},
+		//Создать новый промокод
+		[createPromo.fulfilled.type]: (state, action: PayloadAction<IPromo>) => {
+			state.isLoadingCreatePromo = false;
+			state.createPromoSuccessMessage = "Promo created";
+			state.createPromoErrorMessage = "";
+			let prevPromos = [...current(state.promocodes)];
+			let newPromos = [...prevPromos, action.payload];
+			state.promocodes = newPromos;
+		},
+		[createPromo.pending.type]: state => {
+			state.isLoadingCreatePromo = true;
+		},
+		[createPromo.rejected.type]: (state, action: PayloadAction<string>) => {
+			state.isLoadingCreatePromo = false;
+			state.createPromoSuccessMessage = "";
+			state.createPromoErrorMessage = action.payload;
+		},
+
+		[deletePromo.fulfilled.type]: (state, action: PayloadAction<string>) => {
+			state.isLoadingDeletePromo = false;
+			state.deletePromoSuccessMessage = "Промокод успешно удален";
+			state.deletePromoErrorMessage = "";
+			let prevPromos = [...current(state.promocodes)];
+			let newPromos = [...prevPromos].filter(
+				promo => promo._id !== action.payload
+			);
+			state.promocodes = newPromos;
+		},
+		[deletePromo.pending.type]: state => {
+			state.isLoadingDeletePromo = true;
+		},
+		[deletePromo.rejected.type]: (state, action: PayloadAction<string>) => {
+			state.isLoadingDeletePromo = false;
 		},
 	},
 });

@@ -12,6 +12,7 @@ import {
 	Dialogs,
 	Posting,
 	Prices,
+	Promocodes,
 	Users,
 	WebContent,
 } from "../pages/admin-panel/pages";
@@ -53,7 +54,9 @@ const App: FC = () => {
 					<Route path="/admin-panel/dialogs/:chatId" element={<Dialog />} />
 					<Route path="/admin-panel/prices" element={<Prices />} />
 					<Route path="/admin-panel/web-content" element={<WebContent />} />
+					<Route path="/admin-panel/promocodes" element={<Promocodes />} />
 					<Route path="/admin-panel/auth" element={<Auth />} />
+
 					{/* <Route path="/successPayment/:billId" element={<AdminPanel />} /> */}
 				</Routes>
 			</div>

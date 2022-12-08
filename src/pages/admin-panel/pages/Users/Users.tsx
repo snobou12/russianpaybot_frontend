@@ -43,6 +43,7 @@ const Users: FC = () => {
 									<th style={{ width: "10%" }}>@name</th>
 									<th style={{ width: "10%" }}>Имя</th>
 									<th style={{ width: "10%" }}>Фамилия</th>
+									<th style={{ width: "10%" }}>Промо</th>
 									<th style={{ width: "4%" }}>Перейти к диалогу</th>
 								</tr>
 								{users.length > 0 &&
@@ -67,6 +68,9 @@ const Users: FC = () => {
 											</td>
 											<td>
 												<span>{user.lastname ? user.lastname : "-"}</span>
+											</td>
+											<td>
+												<span>{user.usedPromo ? user.usedPromo : "-"}</span>
 											</td>
 											<td
 												onClick={() =>

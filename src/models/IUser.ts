@@ -5,4 +5,5 @@ export interface IUser {
     firstname:string,
     lastname:string,
     photoPath?:string;
+    usedPromo?:string;
   }

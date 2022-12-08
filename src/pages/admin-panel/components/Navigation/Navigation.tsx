@@ -46,22 +46,23 @@ const Navigation: FC = () => {
 		},
 		{
 			id: 4,
+			title: "Промокоды",
+			path: "/admin-panel/promocodes",
+			icon: RiCoupon3Fill,
+		},
+		{
+			id: 5,
 			title: "Графики",
 			path: "/admin-panel/charts",
 			icon: FaChartLine,
 		},
 		{
-			id: 5,
+			id: 6,
 			title: "Рассылка",
 			path: "/admin-panel/posting",
 			icon: IoMailUnreadSharp,
 		},
-		{
-			id: 6,
-			title: "Промокоды",
-			path: "/admin-panel/promocodes",
-			icon: RiCoupon3Fill,
-		},
+
 		{
 			id: 7,
 			title: "Контент на сайте",

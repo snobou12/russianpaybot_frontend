@@ -21,8 +21,12 @@ const Dialog: FC = () => {
 
 	React.useEffect(() => {}, []);
 	const dispatch = useAppDispatch();
-	const { conversation, isLoadingConversation, conversationErrorMessage } =
-		useAppSelector(state => state.apReducer);
+	const {
+		conversation,
+		isLoadingConversation,
+		conversationErrorMessage,
+		isLoadingSending,
+	} = useAppSelector(state => state.apReducer);
 	const [messageInput, setMessageInput] = React.useState<string>("");
 	const { chatId } = useParams();
 	const handleReloadConversation = () => {
@@ -45,12 +49,6 @@ const Dialog: FC = () => {
 			};
 			dispatch(sendMessage([chatId, message]));
 		}
-		setTimeout(() => {
-			if (messagesRef.current) {
-				messagesRef.current.scrollTo({ top: 9999999, behavior: "smooth" });
-			}
-		}, 500);
-		setMessageInput("");
 	};
 
 	function handleKeyDown(e: React.KeyboardEvent<HTMLDivElement>) {
@@ -63,13 +61,27 @@ const Dialog: FC = () => {
 		if (chatId) {
 			dispatch(getConversation(chatId));
 		}
-		setTimeout(() => {
-			if (messagesRef.current) {
-				messagesRef.current.scrollTo({ top: 9999999, behavior: "smooth" });
-			}
-		}, 500);
 	}, [chatId]);
+	React.useEffect(() => {
+		if (!isLoadingConversation) {
+			setTimeout(() => {
+				if (messagesRef.current) {
+					messagesRef.current.scrollTo({ top: 9999999, behavior: "smooth" });
+				}
+			}, 100);
+		}
+	}, [isLoadingConversation]);
 
+	React.useEffect(() => {
+		if (!isLoadingSending) {
+			setTimeout(() => {
+				if (messagesRef.current) {
+					messagesRef.current.scrollTo({ top: 9999999, behavior: "smooth" });
+				}
+				setMessageInput("");
+			}, 0);
+		}
+	}, [isLoadingSending]);
 	return (
 		<div onKeyDown={handleKeyDown} className="ap__dialog ap__page">
 			<Header />

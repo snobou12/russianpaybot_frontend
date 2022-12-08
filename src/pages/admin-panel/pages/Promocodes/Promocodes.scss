@@ -1,0 +1,82 @@
+/** @format */
+@import "../../../../styles/variables";
+
+.ap__promocodes {
+	form {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-items: flex-start;
+		gap: 10px;
+		input {
+			width: 100%;
+		}
+		button {
+			width: 100%;
+		}
+		margin-bottom: 20px;
+		padding: 10px;
+		border-radius: 10px;
+		background-color: $primary;
+	}
+}
+.ap__promocodes_row {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 20px;
+}
+.ap__promo_input-checkbox {
+	width: 20px !important;
+	height: 20px !important;
+}
+
+.ap__promocodes_promo-is_disabled {
+	&--true {
+		background-color: $success;
+	}
+}
+.ap__promocodes_promo-is_one_time {
+	&--true {
+		background-color: $success;
+	}
+}
+
+.ap__promocodes_promo_delete {
+	color: #fff;
+	&:hover {
+		cursor: pointer;
+		background-color: $error;
+	}
+}
+
+.promo__generate_icon {
+	width: 30px;
+	height: 30px;
+}
+
+.ap__promocodes_generate {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	transition: ease 0.5s all;
+	label {
+		font-size: 1rem;
+		&:hover {
+			cursor: pointer;
+		}
+	}
+
+	svg {
+		transition: ease 0.8s all;
+	}
+	&:hover {
+		cursor: pointer;
+		opacity: 0.7;
+		svg {
+			transform: rotate(180deg);
+		}
+	}
+}
