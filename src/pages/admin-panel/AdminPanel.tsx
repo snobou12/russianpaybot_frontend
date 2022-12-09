@@ -1,5 +1,6 @@
 import React,{FC} from 'react'
 import "./AdminPanel.scss";
+
 import { Header, Navigation } from './components';
 const AdminPanel:FC =()=> {
   
@@ -9,7 +10,7 @@ const AdminPanel:FC =()=> {
       <Navigation />
       <div className="ap__page_content">
         <div className="ap__page_inner">
-          Main
+          Home
         </div>
       </div>
     </div>
