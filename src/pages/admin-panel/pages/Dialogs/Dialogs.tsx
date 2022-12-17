@@ -7,19 +7,37 @@ import { getBotActions } from "../../../../helps/getBotActions";
 import { getFormatTime } from "../../../../helps/getTime";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks/redux";
 import { getConversations } from "../../../../redux/reducers/apReducer/ActionApCreator";
-import { APHeader, Header, Navigation } from "../../components";
+import { APHeader, APPaginator, Header, Navigation } from "../../components";
 import "./Dialogs.scss";
 const Dialogs: FC = () => {
 	const dispatch = useAppDispatch();
 	const { isLoadingConversations, conversations } = useAppSelector(
 		state => state.apReducer
 	);
-	React.useEffect(() => {
-		dispatch(getConversations());
-	}, []);
-	const handleReloadConversations = () => {
-		dispatch(getConversations());
+
+	const [page, setPage] = React.useState<number>(1);
+
+	const nextPage = () => {
+		if (page < conversations.maxPage) {
+			setPage(page + 1);
+		}
 	};
+	const previousPage = () => {
+		if (page > 1) {
+			setPage(page - 1);
+		}
+	};
+	const handleChangePage = (selectedPage: number) => {
+		setPage(selectedPage);
+	};
+
+	const handleReloadConversations = () => {
+		dispatch(getConversations(page));
+	};
+
+	React.useEffect(() => {
+		dispatch(getConversations(page));
+	}, [page]);
 	return (
 		<div className="ap__dialogs ap__page">
 			<Header />
@@ -29,6 +47,13 @@ const Dialogs: FC = () => {
 					<APHeader
 						title="Диалоги"
 						handleClickReload={handleReloadConversations}
+					/>
+					<APPaginator
+						previousPage={previousPage}
+						nextPage={nextPage}
+						page={page}
+						handleChangePage={handleChangePage}
+						maxPage={conversations.maxPage}
 					/>
 
 					{isLoadingConversations ? (
@@ -41,8 +66,8 @@ const Dialogs: FC = () => {
 									<th style={{ width: "10%" }}>Чат ID</th>
 									<th style={{ width: "30%" }}>Последнее сообщение</th>
 								</tr>
-								{conversations.length > 0 &&
-									conversations.map((conversation, idx) => (
+								{conversations.conversations.length > 0 &&
+									conversations.conversations.map((conversation, idx) => (
 										<tr key={`${conversation.chatId}:${idx}`}>
 											<td>
 												<span>
@@ -65,7 +90,11 @@ const Dialogs: FC = () => {
 														{getBotActions(conversation.lastMessage.message)}
 													</span>
 													<span>
-														{getFormatTime(conversation.lastMessage.createdAt)}
+														{getFormatTime(
+															conversation.lastMessage.createdAt,
+															"",
+															false
+														)}
 													</span>
 												</Link>
 											</td>

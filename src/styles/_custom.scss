@@ -44,3 +44,68 @@
 		box-shadow: 0 1px 7px rgb(4 38 51 / 30%);
 	}
 }
+
+.btn__primary {
+	border: none;
+	display: block;
+	text-align: center;
+	cursor: pointer;
+	text-transform: uppercase;
+	outline: none;
+	overflow: hidden;
+	position: relative;
+	color: #fff;
+	font-weight: 700;
+	font-size: 1.6rem;
+	border-radius: 8px;
+	background-color: #222;
+	height: 50px;
+	padding: 0 30px;
+	margin: 0 auto;
+	background: linear-gradient(
+		180deg,
+		rgba(255, 255, 255, 0.1) 0%,
+		rgba(255, 255, 255, 0) 100%
+	);
+	backdrop-filter: blur(20.8333px);
+	span {
+		position: relative;
+		z-index: 1;
+	}
+	&::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		top: 0;
+		height: 300%;
+		width: 140%;
+		background: $purple;
+		-webkit-transition: all 0.5s ease-in-out;
+		transition: all 0.5s ease-in-out;
+		-webkit-transform: translateX(-98%) translateY(-25%) rotate(45deg);
+		transform: translateX(-98%) translateY(-25%) rotate(45deg);
+	}
+	&:hover {
+		&::after {
+			-webkit-transform: translateX(-9%) translateY(-25%) rotate(45deg);
+			transform: translateX(-9%) translateY(-25%) rotate(45deg);
+		}
+	}
+}
+.container {
+	position: relative;
+	top: 0;
+	left: 0;
+	z-index: 1;
+	max-width: $maxWidth;
+	margin: 0 auto;
+}
+
+.blur__circle {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	background: $purple;
+	filter: blur(100px);
+}

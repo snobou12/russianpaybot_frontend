@@ -5,6 +5,7 @@ import AuthService from "../../../services/AuthService";
 import UserService from "../../../services/UserService";
 import PriceService from "../../../services/PriceService";
 import PromoService from "../../../services/PromoService";
+import OrderService from "../../../services/OrderService";
 
 import ConversationService from "../../../services/ConversationService";
 import { messageType } from "../../../models/IConversation";
@@ -57,9 +58,23 @@ export const logout = createAsyncThunk("admin/logout", async (_, thunkApi) => {
 
 export const getUsers = createAsyncThunk(
 	"admin/getUsers",
-	async (_, thunkApi) => {
+	async (page: number, thunkApi) => {
 		try {
-			const response = await UserService.getUsers();
+			const response = await UserService.getUsers(page);
+			return response.data;
+		} catch (e: any) {
+			if (e.response?.data?.message) {
+				return thunkApi.rejectWithValue(e.response.data.message);
+			}
+		}
+	}
+);
+
+export const searchUsers = createAsyncThunk(
+	"admin/searchUsers",
+	async (query: string, thunkApi) => {
+		try {
+			const response = await UserService.searchUsers(query);
 			return response.data;
 		} catch (e: any) {
 			if (e.response?.data?.message) {
@@ -73,9 +88,9 @@ export const getUsers = createAsyncThunk(
 
 export const getConversations = createAsyncThunk(
 	"admin/getConversations",
-	async (_, thunkApi) => {
+	async (page: number, thunkApi) => {
 		try {
-			const response = await ConversationService.getConversations();
+			const response = await ConversationService.getConversations(page);
 			return response.data;
 		} catch (e: any) {
 			if (e.response?.data?.message) {
@@ -191,6 +206,22 @@ export const deletePromo = createAsyncThunk(
 	async (_id: string, thunkApi) => {
 		try {
 			const response = await PromoService.deletePromo(_id);
+			return response.data;
+		} catch (e: any) {
+			if (e.response?.data?.message) {
+				return thunkApi.rejectWithValue(e.response.data.message);
+			}
+		}
+	}
+);
+
+//Заказы
+
+export const getOrders = createAsyncThunk(
+	"admin/getOrders",
+	async (page: number, thunkApi) => {
+		try {
+			const response = await OrderService.getOrders(page);
 			return response.data;
 		} catch (e: any) {
 			if (e.response?.data?.message) {

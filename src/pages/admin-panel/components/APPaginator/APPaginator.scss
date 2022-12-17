@@ -1,0 +1,70 @@
+/** @format */
+
+@import "../../../../styles/variables";
+
+.ap__pagination {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: flex-start;
+	margin-bottom: 20px;
+	gap: 10px;
+}
+.app__controllers {
+	width: 100%;
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	gap: 10px;
+}
+.app__controller {
+	background-color: $primary;
+	border: solid 2px $secondary;
+	height: 30px;
+	width: 90px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: ease all 0.3s;
+	&:hover {
+		cursor: pointer;
+		border: solid 2px $primary;
+		background-color: $secondary;
+		color: $primary;
+	}
+	&--disabled {
+		pointer-events: none;
+		opacity: 0.6;
+	}
+}
+
+.app__controller_pages {
+	max-width: 90%;
+	max-width: 100%;
+	.swiper-slide {
+		width: calc(45px) !important;
+	}
+}
+
+.app__controller_page {
+	height: 30px;
+	width: 30px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: $primary;
+	border: solid 2px $secondary;
+	transition: ease all 0.3s;
+
+	&:hover {
+		cursor: pointer;
+		border: solid 2px $primary;
+		background-color: $secondary;
+		color: $primary;
+	}
+	&--selected {
+		pointer-events: none;
+		opacity: 0.6;
+	}
+}

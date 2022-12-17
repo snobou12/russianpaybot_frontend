@@ -1,0 +1,16 @@
+@import "../../../../../styles/variables";
+
+.ap__users_searcher{
+    display: inline-flex;
+    justify-content:flex-start;
+    align-items: center;
+    padding: 10px;
+    gap:15px;
+    background-color:$primary;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    input{
+        height: 25px;
+    }
+}

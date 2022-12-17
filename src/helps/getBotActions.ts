@@ -1,6 +1,8 @@
 /** @format */
-
-const queries: any = {
+type query = {
+	[name: string]: string;
+};
+const queries: query = {
 	"data-spotify_btn": "Spotify Premium",
 	"data-spotify_1_btn": "Индивидуальная подписка Spotify 1 месяц",
 	"data-spotify_3_btn": "Индивидуальная подписка Spotify 3 месяца",

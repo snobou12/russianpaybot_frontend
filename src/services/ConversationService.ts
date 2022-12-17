@@ -5,8 +5,8 @@ import { messageType } from "../models/IConversation";
 
 export default class ConversationService {
     //Получить все диалоги пользователей
-	static async getConversations(): Promise<AxiosResponse> {
-		return $api.get("/getConversations");
+	static async getConversations(page:number): Promise<AxiosResponse> {
+		return $api.get(`/getConversations?page=${page}`);
 	}
     //Получить диалог пользователя
 	static async getConversation(chatId:string): Promise<AxiosResponse> {

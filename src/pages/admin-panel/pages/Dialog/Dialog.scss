@@ -2,7 +2,7 @@
 
 @import "../../../../styles/variables";
 .ap__dialog_chat {
-	height: calc(100vh - 50px - 70px - 120px);
+	height: calc(100vh - 50px - 70px - 80px);
 	display: flex;
 	flex-flow: column wrap;
 	justify-content: space-between;
@@ -14,8 +14,9 @@
 	border-right: 20px solid $primary;
 	resize: horizontal;
 	overflow: auto;
+	width: 70%;
 	max-width: 100%;
-	min-width: 50%;
+	min-width: 40%;
 	max-height: fit-content;
 }
 

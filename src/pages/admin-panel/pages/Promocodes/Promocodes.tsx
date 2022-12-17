@@ -10,9 +10,11 @@ import {
 	deletePromo,
 	getPromos,
 } from "../../../../redux/reducers/apReducer/ActionApCreator";
+import { toast } from "react-toastify";
 import { APHeader, Header, Navigation } from "../../components";
 import generateCode from "../../../../helps/generateCode";
 import "./Promocodes.scss";
+
 const Promocodes: FC = () => {
 	const dispatch = useAppDispatch();
 	const { isLoadingPromocodes, promocodes } = useAppSelector(
@@ -34,11 +36,19 @@ const Promocodes: FC = () => {
 
 	const handleSubmitCreatePromocode = (e: React.FormEvent) => {
 		e.preventDefault();
-		dispatch(createPromo([title, discount, isOneTime, isDisabled]));
-		setTitle("");
-		setDiscount(1);
-		setIsOneTime(false);
-		setIsDisabled(false);
+		dispatch(createPromo([title, discount, isOneTime, isDisabled])).then(
+			res => {
+				if (typeof res.payload === "string") {
+					toast.error(res.payload);
+				} else {
+					setTitle("");
+					setDiscount(1);
+					setIsOneTime(false);
+					setIsDisabled(false);
+					toast.success("Промокод создан");
+				}
+			}
+		);
 	};
 	const handleDeletePromo = (_id: string) => {
 		dispatch(deletePromo(_id));

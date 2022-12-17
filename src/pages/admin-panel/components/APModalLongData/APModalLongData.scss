@@ -1,0 +1,94 @@
+/** @format */
+
+@import "../../../../styles/variables";
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0;
+	}
+	to {
+		top: 0;
+		opacity: 1;
+	}
+}
+
+.ap__long_data-modal {
+	display: none;
+	position: fixed;
+	justify-content: center;
+	align-items: center;
+	z-index: 4;
+	left: 0;
+	top: 0;
+	width: 100vw;
+	height: 100vh;
+	overflow: auto;
+	background-color: rgba(0, 0, 0, 0.8);
+	&--show {
+		display: flex;
+	}
+}
+
+.ap__long_data-modal--block {
+	position: relative;
+	min-width: 500px;
+	max-width: 500px;
+	min-height: 150px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	-webkit-animation-duration: 0.7s;
+	animation-name: animatetop;
+	animation-duration: 0.7s;
+	border-radius: 10px;
+	background-color: $primary;
+	color: $secondary;
+	padding: 20px;
+
+	h2 {
+		margin-bottom: 20px;
+	}
+}
+
+.app__long_data-modal__var_id {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	transition: ease all 0.3s;
+	&:hover {
+		opacity: 0.7;
+		cursor: pointer;
+	}
+}
+
+.ap__long_data-modal--close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 101;
+	width: 30px;
+	height: auto;
+	color: #808383;
+	transition: ease color 0.3s;
+	&:hover {
+		cursor: pointer;
+		color: #a0a0a0;
+	}
+}
+
+.ap__long_data-show {
+	transition: ease all 0.3s;
+	svg {
+		transition: ease all 0.3s;
+	}
+	&:hover {
+		background-color: $secondary;
+		cursor: pointer;
+		svg {
+			color: $primary;
+		}
+	}
+}

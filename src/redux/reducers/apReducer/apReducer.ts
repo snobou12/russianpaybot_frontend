@@ -5,6 +5,7 @@ import { adminPaths } from "../../../const/adminPaths";
 import { IAdmin } from "../../../models/IAdmin";
 import { IAllConversation } from "../../../models/IAllConversation";
 import { IConversation, messageType } from "../../../models/IConversation";
+import { IOrder } from "../../../models/IOrder";
 import { IPrice, PricePlanType } from "../../../models/IPrice";
 import { IPromo } from "../../../models/IPromo";
 import { IUser } from "../../../models/IUser";
@@ -15,11 +16,13 @@ import {
 	deletePromo,
 	getConversation,
 	getConversations,
+	getOrders,
 	getPrices,
 	getPromos,
 	getUsers,
 	login,
 	logout,
+	searchUsers,
 	sendMessage,
 } from "./ActionApCreator";
 interface LoginPayloadType {
@@ -38,35 +41,52 @@ interface ChangePriceType {
 	title: string;
 }
 
+interface UsersPayload {
+	users: IUser[];
+	maxPage: number;
+}
+interface ConversationsPayload {
+	conversations: IAllConversation[];
+	maxPage: number;
+}
+
+interface OrdersPayload {
+	orders: IOrder[];
+	maxPage: number;
+}
+
 interface AuthState {
-	//navigation
+	//Navigation
 	activeNav: number;
-	//admin
+	//Admin
 	isLoadingAdmin: boolean;
 	isAuth: boolean;
 	admin: IAdmin;
-	//users
+	//Users
 	isLoadingUsers: boolean;
-	users: IUser[];
-	//conversations
+	users: UsersPayload;
+	//Search users
+	isLoadingFoundUsers: boolean;
+	foundUsers: IUser[];
+	//Conversations
 	isLoadingConversations: boolean;
-	conversations: IAllConversation[];
-	//conversation
+	conversations: ConversationsPayload;
+	//Conversation
 	isLoadingConversation: boolean;
 	conversationErrorMessage: string;
 	conversation: IConversation | Record<string, never>;
-	//sendMessage
+	//SendMessage
 	isLoadingSending: boolean;
 	sendingSuccessMessage: string;
 	sendingErrorMessage: string;
-	//prices
+	//Prices
 	isLoadingPrices: boolean;
 	prices: IPrice[];
-	//change price
+	//Change price
 	isLoadingChangingPrice: boolean;
 	changingPriceSuccessMessage: string;
 	changingPriceErrorMessage: string;
-	//promocodes
+	//Promocodes
 	promocodes: IPromo[];
 	isLoadingPromocodes: boolean;
 	isLoadingCreatePromo: boolean;
@@ -75,25 +95,36 @@ interface AuthState {
 	isLoadingDeletePromo: boolean;
 	deletePromoSuccessMessage: string;
 	deletePromoErrorMessage: string;
+	//Orders
+	orders: OrdersPayload;
+	isLoadingOrders: boolean;
 }
 
 const initialState: AuthState = {
-	//navigation
+	//Navigation
 	activeNav: 0,
-	//admin
+	//Admin
 	isAuth: false,
 	isLoadingAdmin: false,
 	admin: {
 		id: "",
 		login: "",
 	},
-	//users
+	//Users
 	isLoadingUsers: false,
-	users: [],
-	//conversations
+	users: {
+		users: [],
+		maxPage: 0,
+	},
+	isLoadingFoundUsers: false,
+	foundUsers: [],
+	//Conversations
 	isLoadingConversations: false,
-	conversations: [],
-	//conversation
+	conversations: {
+		conversations: [],
+		maxPage: 0,
+	},
+	//Conversation
 	isLoadingConversation: false,
 	conversation: {},
 	conversationErrorMessage: "",
@@ -101,14 +132,14 @@ const initialState: AuthState = {
 	isLoadingSending: false,
 	sendingSuccessMessage: "",
 	sendingErrorMessage: "",
-	//prices
+	//Prices
 	isLoadingPrices: false,
 	prices: [],
 	//changePrice
 	isLoadingChangingPrice: false,
 	changingPriceSuccessMessage: "",
 	changingPriceErrorMessage: "",
-	//promocodes
+	//Promocodes
 	//createPromo
 	promocodes: [],
 	isLoadingPromocodes: false,
@@ -118,6 +149,13 @@ const initialState: AuthState = {
 	isLoadingDeletePromo: false,
 	deletePromoSuccessMessage: "",
 	deletePromoErrorMessage: "",
+
+	//Orders
+	orders: {
+		orders: [],
+		maxPage: 0,
+	},
+	isLoadingOrders: false,
 };
 
 export const apSlice = createSlice({
@@ -212,7 +250,7 @@ export const apSlice = createSlice({
 		},
 		//users
 		//Получить всех пользователей
-		[getUsers.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
+		[getUsers.fulfilled.type]: (state, action: PayloadAction<UsersPayload>) => {
 			state.isLoadingUsers = false;
 			state.users = action.payload;
 		},
@@ -221,7 +259,20 @@ export const apSlice = createSlice({
 		},
 		[getUsers.rejected.type]: state => {
 			state.isLoadingUsers = false;
-			state.users = [];
+			state.users.users = [];
+			state.users.maxPage = 0;
+		},
+		//Искать пользователей
+		[searchUsers.fulfilled.type]: (state, action: PayloadAction<IUser[]>) => {
+			state.isLoadingFoundUsers = false;
+			state.foundUsers = action.payload;
+		},
+		[searchUsers.pending.type]: state => {
+			state.isLoadingFoundUsers = true;
+		},
+		[searchUsers.rejected.type]: state => {
+			state.isLoadingFoundUsers = false;
+			state.foundUsers = [];
 		},
 
 		//conversations
@@ -229,7 +280,7 @@ export const apSlice = createSlice({
 
 		[getConversations.fulfilled.type]: (
 			state,
-			action: PayloadAction<IAllConversation[]>
+			action: PayloadAction<ConversationsPayload>
 		) => {
 			state.isLoadingConversations = false;
 			state.conversations = action.payload;
@@ -239,7 +290,8 @@ export const apSlice = createSlice({
 		},
 		[getConversations.rejected.type]: state => {
 			state.isLoadingConversations = false;
-			state.conversations = [];
+			state.conversations.conversations = [];
+			state.conversations.maxPage = 0;
 		},
 		//Получить  диалог пользователя
 
@@ -374,6 +426,22 @@ export const apSlice = createSlice({
 		},
 		[deletePromo.rejected.type]: (state, action: PayloadAction<string>) => {
 			state.isLoadingDeletePromo = false;
+		},
+		//Заказы
+		[getOrders.fulfilled.type]: (
+			state,
+			action: PayloadAction<OrdersPayload>
+		) => {
+			state.isLoadingOrders = false;
+			state.orders = action.payload;
+		},
+		[getOrders.pending.type]: state => {
+			state.isLoadingOrders = true;
+		},
+		[getOrders.rejected.type]: state => {
+			state.isLoadingOrders = false;
+			state.orders.orders = [];
+			state.orders.maxPage = 0;
 		},
 	},
 });

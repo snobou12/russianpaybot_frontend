@@ -2,23 +2,21 @@
 
 import classNames from "classnames";
 import React, { FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { FaUsersCog, FaChartLine } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import { FaUsersCog } from "react-icons/fa";
 import { IoMailUnreadSharp } from "react-icons/io5";
 import { IoIosPricetags } from "react-icons/io";
 import { SiDialogflow } from "react-icons/si";
 import { TbArrowAutofitContent } from "react-icons/tb";
-import { RiCoupon3Fill } from "react-icons/ri";
+import { RiCoupon3Fill, RiListOrdered } from "react-icons/ri";
 import { AiFillHome } from "react-icons/ai";
 import { useAppDispatch, useAppSelector } from "../../../../redux/hooks/redux";
 import { changeActiveNav } from "../../../../redux/reducers/apReducer/apReducer";
-import { logout } from "../../../../redux/reducers/apReducer/ActionApCreator";
-import apLogo from "../../assets/logo2.png";
+import apLogo from "../../assets/logo.png";
 import "./Navigation.scss";
 const Navigation: FC = () => {
 	const dispatch = useAppDispatch();
 	const { activeNav } = useAppSelector(state => state.apReducer);
-	const navigate = useNavigate();
 	const navigationItems = [
 		{
 			id: 0,
@@ -50,12 +48,14 @@ const Navigation: FC = () => {
 			path: "/admin-panel/promocodes",
 			icon: RiCoupon3Fill,
 		},
+
 		{
 			id: 5,
-			title: "Графики",
-			path: "/admin-panel/charts",
-			icon: FaChartLine,
+			title: "Заказы",
+			path: "/admin-panel/orders",
+			icon: RiListOrdered,
 		},
+
 		{
 			id: 6,
 			title: "Рассылка",
@@ -73,11 +73,7 @@ const Navigation: FC = () => {
 	const handleChangeActiveNav = (id: number) => {
 		dispatch(changeActiveNav(id));
 	};
-	const handleLogout = () => {
-		dispatch(logout()).then(() => {
-			navigate("/admin-panel/auth");
-		});
-	};
+
 	return (
 		<div className="ap__navigation">
 			<Link
@@ -108,12 +104,6 @@ const Navigation: FC = () => {
 					))}
 				</ul>
 			</nav>
-
-			<div className="ap__logout">
-				<button onClick={handleLogout} className="btn btn--inverted">
-					Выход
-				</button>
-			</div>
 		</div>
 	);
 };

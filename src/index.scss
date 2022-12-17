@@ -1,6 +1,6 @@
 /** @format */
 @import url("https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;900&display=swap");
-
+@import url("https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700&display=swap");
 @import "./styles/variables.scss";
 @import "./styles/custom";
 
@@ -48,10 +48,10 @@ ul {
 }
 html {
 	font-size: 10px;
+	scroll-behavior: smooth;
 }
 body {
 	min-height: 100vh;
-	scroll-behavior: smooth;
 	text-rendering: optimizeSpeed;
 	line-height: 1.6rem;
 	font-size: 1.6rem;
@@ -118,4 +118,43 @@ table {
 			color: $secondary;
 		}
 	}
+}
+
+.Toastify__toast-container {
+	width: auto !important;
+}
+.Toastify__toast {
+	background: $primary !important;
+	color: $secondary !important;
+	font-weight: 500;
+	font-family: "Rubik" !important;
+}
+
+.Toastify__toast--error {
+	svg {
+		fill: $error !important;
+	}
+}
+
+.Toastify__toast--success {
+	svg {
+		fill: $success !important;
+	}
+}
+
+.Toastify__progress-bar--error {
+	background: $error !important;
+}
+.Toastify__progress-bar--success {
+	background: $success !important;
+}
+
+.Toastify__close-button {
+	svg {
+		fill: $secondary !important;
+	}
+}
+
+.swiper {
+	width: 100% !important;
 }

@@ -1,0 +1,26 @@
+/** @format */
+
+@import "../../../../styles/variables";
+
+.ap__orders_header {
+}
+
+.ap__orders {
+	table {
+		margin-bottom: 20px;
+	}
+}
+
+.ap__orders_to-dialog {
+	transition: ease all 0.3s;
+	svg {
+		transition: ease all 0.3s;
+	}
+	&:hover {
+		background-color: $secondary;
+		cursor: pointer;
+		svg {
+			color: $primary;
+		}
+	}
+}

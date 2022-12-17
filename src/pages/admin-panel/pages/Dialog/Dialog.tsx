@@ -8,7 +8,7 @@ import {
 	getConversation,
 	sendMessage,
 } from "../../../../redux/reducers/apReducer/ActionApCreator";
-import logo from "../../assets/logo2.png";
+import logo from "../../assets/logo.png";
 import { Spinner } from "../../../../components";
 import { formatStyleType, getFormatTime } from "../../../../helps/getTime";
 import { messageType } from "../../../../models/IConversation";
@@ -108,10 +108,7 @@ const Dialog: FC = () => {
 						<h2 className="ap__dialog__error">{conversationErrorMessage}</h2>
 					) : (
 						<div ref={chatRef} className="ap__dialog_chat">
-							<div className="dialog_chat__header">
-								<span>Поиск сообщений</span>
-								<input className="inpt" />
-							</div>
+							<div className="dialog_chat__header"></div>
 							<div ref={messagesRef} className="dialog_chat__messages">
 								{conversation.conversation?.messages.length > 0 &&
 									conversation.conversation?.messages.map((msg, idx) => {
@@ -126,6 +123,8 @@ const Dialog: FC = () => {
 													<span className="dialog_chat__messages_item-date">
 														{getFormatTime(
 															msg.createdAt,
+															"",
+															false,
 															formatStyleType.SHORT
 														)}
 													</span>
@@ -141,6 +140,8 @@ const Dialog: FC = () => {
 													<span className="dialog_chat__messages_item-date">
 														{getFormatTime(
 															msg.createdAt,
+															"",
+															false,
 															formatStyleType.SHORT
 														)}
 													</span>

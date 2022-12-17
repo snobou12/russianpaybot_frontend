@@ -23,9 +23,9 @@
 		background: rgba(0, 0, 0, 0.8);
 		z-index: 2;
 	}
-	padding: 50px;
+	padding: 25px;
 	.ap__page_inner {
-		width: 100%;
+		max-width: 100%;
 		position: relative;
 		z-index: 3;
 	}
